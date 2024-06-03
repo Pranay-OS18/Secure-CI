@@ -20,7 +20,7 @@ pipeline {
         stage('SAST Scan') {
             steps {
                 withSonarQubeEnv('Sonar-Server') {
-                        sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=secure-ci -Dsonar.projectKey=secure-ci_java-app-project \
+                        sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.organization=secure_ci  -Dsonar.projectName=secure-ci -Dsonar.projectKey=secure-ci_java-app-project \
                         -Dsonar.java.binaries=. '''
                 }
             }
