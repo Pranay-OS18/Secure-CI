@@ -1,3 +1,4 @@
+
 pipeline {
     agent any
 
@@ -43,9 +44,17 @@ pipeline {
         stage('SCA Scan') {
             steps {
                 snykSecurity(
-                    snykInstallation: 'Snyk', snykTokenId: 'Snyk-API-Token', failOnIssues: false, monitorProjectOnBuild: true, additionalArguments: '--sca --debug'  
+                    snykInstallation: 'Snyk', snykTokenId: 'Snyk-API-Token', failOnIssues: false, monitorProjectOnBuild: true, additionalArguments: '--sca --debug'
                 )
             }
-        }   
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                withDockerRegistry(credentialsId: 'Docker-Cred', toolName: 'Docker') {
+                    sh 'docker build -t pranay18cr/bg-app-image:v1'
+                }
+            }
+        }
     }
 }
