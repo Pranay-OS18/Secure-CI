@@ -53,7 +53,7 @@ pipeline {
             steps {
                script {
 		    withDockerRegistry(credentialsId: 'Docker-Cred', url: '', toolName: 'Docker') {
-			sh 'docker build -t pranay18cr/bg-app-image:v1 .'
+			sh 'sudo docker build -t pranay18cr/bg-app-image:v1 .'
 		    }
                 }
             }
