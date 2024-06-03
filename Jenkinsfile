@@ -51,8 +51,10 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                withDockerRegistry(credentialsId: 'Docker-Cred', url: '', toolName: 'Docker') {
-                    sh 'docker build -t pranay18cr/bg-app-image:v1'
+               script {
+		    withDockerRegistry(credentialsId: 'Docker-Cred', url: '', toolName: 'Docker') {
+			sh 'docker build -t pranay18cr/bg-app-image:v1 .'
+		    }
                 }
             }
         }
